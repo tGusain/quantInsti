@@ -31,4 +31,5 @@ API : /showAll (for showing all data)
 HOW TO USE
 1. npm install
 2. node app.js in the current quantinsti folder
+3. View : localhost:4444/
 
