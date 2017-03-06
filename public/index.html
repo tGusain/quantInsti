@@ -1,0 +1,112 @@
+<!-- index.html -->
+<!doctype html>
+
+<html ng-app="quantInsti">
+  <head>
+    <title>QuantInsti</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+  </head>
+  <body ng-controller="mainController">
+    <div class="jumbotron text-center">
+      <h2>Quantinsti</h2>
+    </div>
+    <div class="container">
+
+      <div>
+        <div class="jumbotron" ng-show="view">
+          <div class="text-center">Instrument View</div>
+          <br/>
+          <table class="table table-hover table-bordered">
+            <tr>
+              <th>Instrument Id</th>
+              <th>Status</th>
+              <th>Units</th>
+              <th>Position</th>
+            </tr>
+            <tr ng-repeat="instrument in instruments">
+              <td>{{instrument.instrument_id}}</td>
+              <td>{{instrument.status}}</td>
+              <td>{{instrument.units}}</td>
+              <td>{{instrument.position}}</td>
+            </tr>
+          </table>
+          <div class="text-center">
+            <button class="btn btn-secondary" type="button" ng-click="view=false;newRecord=true;selectedRecord=false">Insert a new record</button>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-secondary" type="button" ng-click="view=false;newRecord=false;selectedRecord=true">Selected Record</button>
+          </div>
+        </div>
+        <div  class="jumbotron" ng-show="newRecord">
+          <div class="row">
+            <div class="col-lg-12s">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Data ..."  ng-model="data">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button"  ng-click="postData(data)">Submit</button>
+                </span>
+
+              </div>
+            </div>
+          </div>
+          <div class="text-center" ng-show="successPost"> Successfully done.</div>
+
+          <div class="text-center">
+            <button class="btn btn-secondary" type="button" ng-click="successPost=false;data=null;view=true;newRecord=false;selectedRecord=false">View Page</button>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-secondary" type="button" ng-click="successPost=false;data=null;view=false;newRecord=false;selectedRecord=true">Selected Record</button>
+          </div>
+
+        </div>
+        <div  class="jumbotron" ng-show="selectedRecord">
+          <div class="row">
+            <div class="col-lg-6s">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="instrumentId">
+
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button"  ng-click="getInstrumentById(instrumentId)">Go!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div ng-show="listSpecificInstrument">
+          <table class="table table-hover table-bordered">
+            <tr>
+              <th>Instrument Id</th>
+              <th>Status</th>
+              <th>Units</th>
+              <th>Position</th>
+            </tr>
+            <tr ng-repeat="instrument in selectedInstruments">
+              <td>{{instrument.instrument_id}}</td>
+              <td>{{instrument.status}}</td>
+              <td>{{instrument.units}}</td>
+              <td>{{instrument.position}}</td>
+            </tr>
+          </table>
+        </div>
+          <div class="text-center" ng-show="instrumentNotFound"> Instrument Not Found.</div>
+
+          <div class="text-center">
+            <button class="btn btn-secondary" type="button" ng-click="view=true;newRecord=false;selectedRecord=false">View Page</button>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-secondary" type="button" ng-click="view=false;newRecord=true;selectedRecord=false">Insert a new record</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  </body>
+</html>
