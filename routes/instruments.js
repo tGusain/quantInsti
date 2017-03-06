@@ -69,7 +69,7 @@ var instruments  = {
       }).then(function(response) {
         return res.send('Succesfully Inserted');
       }).fail(function(err) {
-        console.log("JJJ",err);
+        console.log(err);
       });
 
   },
